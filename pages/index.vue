@@ -173,7 +173,7 @@ export default {
     },
     async deletePlant(id) {
       var user_id = JSON.parse(window.localStorage.getItem("userData")).id;
-      await axios.delete(`https://infinite-anchorage-81055.herokuapp.com/arrosage-plantes/${id}`).then(
+      await axios.delete(`https://warm-plateau-50892.herokuapp.com/arrosage-plantes/${id}`).then(
         (response) => {
           console.log(response);
         },
@@ -183,7 +183,7 @@ export default {
           },
         }
       );
-      const res = await axios.get(`https://infinite-anchorage-81055.herokuapp.com/users/${user_id}`, {
+      const res = await axios.get(`https://warm-plateau-50892.herokuapp.com/users/${user_id}`, {
         headers: {
           Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
         },
@@ -206,7 +206,7 @@ export default {
       console.log(test);
 
       await axios.put(
-        `https://infinite-anchorage-81055.herokuapp.com/arrosage-plantes/${id}`,
+        `https://warm-plateau-50892.herokuapp.com/arrosage-plantes/${id}`,
         {
           dateDarrosage: test,
         },
@@ -216,7 +216,7 @@ export default {
           },
         }
       );
-      const res = await axios.get(`https://infinite-anchorage-81055.herokuapp.com/users/${user_id}`, {
+      const res = await axios.get(`https://warm-plateau-50892.herokuapp.com/users/${user_id}`, {
         headers: {
           Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
         },

@@ -90,7 +90,7 @@ export default {
           );
           await axios
             .post(
-              `https://infinite-anchorage-81055.herokuapp.com/arrosage-plantes`,
+              `https://warm-plateau-50892.herokuapp.com/arrosage-plantes`,
               {
                 NomDeLaPlante: PlanteName,
                 frequency: frequency,
@@ -116,7 +116,7 @@ export default {
               formData.append("ref", "arrosage-plantes");
               formData.append("field", "imageDeLaPlante");
             
-              axios.post("https://infinite-anchorage-81055.herokuapp.com/upload", formData);
+              axios.post("https://warm-plateau-50892.herokuapp.com/upload", formData);
               return refId
             })
             .then((res) => {
@@ -127,7 +127,7 @@ export default {
             });
 
           const res = await axios.get(
-            `https://infinite-anchorage-81055.herokuapp.com/users/${user_id}`,
+            `https://warm-plateau-50892.herokuapp.com/users/${user_id}`,
             {
               headers: {
                 Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
