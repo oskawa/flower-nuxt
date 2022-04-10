@@ -5,7 +5,7 @@
         <div class="image">
           <img
             v-if="plante.image"
-            v-bind:src="'http://localhost:1337' + plante.image.url"
+            v-bind:src="'http://https://warm-plateau-50892.herokuapp.com' + plante.image.url"
           />
           <img v-if="!plante.image" src="" alt="" />
         </div>

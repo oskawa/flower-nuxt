@@ -35,6 +35,7 @@
             </svg>
 
             <h2>Votre liste est vide !</h2>
+            <nuxt-link to="/profile">Ajoutez dès maintenant en cliquant ici !</nuxt-link>
           </div>
 
           <ul v-if="plantesEnregistrees" class="listePlantes">
@@ -44,7 +45,7 @@
                   <img
                     v-if="item.imageDeLaPlante"
                     v-bind:src="
-                      'http://localhost:1337' + item.imageDeLaPlante.url
+                      'https://warm-plateau-50892.herokuapp.com' + item.imageDeLaPlante.url
                     "
                   />
                   <img v-if="!item.imageDeLaPlante" />
