@@ -32,8 +32,8 @@
             <nuxt-link class="button is-light" to="/login"> Log in </nuxt-link>
           </div>
         </div>
-      </div>  -->
-    </div>
+      </div>  
+    </div>-->
   </header>
 </template>
 
