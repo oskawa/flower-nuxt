@@ -46,9 +46,7 @@
                 <div class="imagePlante">
                   <img
                     v-if="item.imageDeLaPlante"
-                    v-bind:src="
-                      'https://warm-plateau-50892.herokuapp.com' +
-                      item.imageDeLaPlante.url
+                    v-bind:src="item.imageDeLaPlante.url
                     "
                   />
                   <img v-if="!item.imageDeLaPlante" />

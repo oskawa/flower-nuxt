@@ -144,6 +144,7 @@ export default {
             }
           );
           const user = res.data;
+          console.log(user)
 
           window.localStorage.setItem("userData", JSON.stringify(user));
           window.localStorage.setItem("plantes", JSON.stringify(user.plantes));
