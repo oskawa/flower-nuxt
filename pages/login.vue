@@ -35,10 +35,7 @@
             </div>
           </form>
           <div style="margin-top: 20px">
-            <p>
-              Don't have an account?
-              <nuxt-link to="/register">Register</nuxt-link>
-            </p>
+           
             <p>
               <nuxt-link to="/forgot-password">Forgot Password?</nuxt-link>
             </p>

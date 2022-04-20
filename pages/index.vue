@@ -35,7 +35,9 @@
             </svg>
 
             <h2>Votre liste est vide !</h2>
-            <nuxt-link to="/profile">Ajoutez dès maintenant en cliquant ici !</nuxt-link>
+            <nuxt-link to="/profile"
+              >Ajoutez dès maintenant en cliquant ici !</nuxt-link
+            >
           </div>
 
           <ul v-if="plantesEnregistrees" class="listePlantes">
@@ -45,7 +47,8 @@
                   <img
                     v-if="item.imageDeLaPlante"
                     v-bind:src="
-                      'https://warm-plateau-50892.herokuapp.com' + item.imageDeLaPlante.url
+                      'https://warm-plateau-50892.herokuapp.com' +
+                      item.imageDeLaPlante.url
                     "
                   />
                   <img v-if="!item.imageDeLaPlante" />
@@ -78,7 +81,23 @@
     <div v-if="!isAuthenticated" class="container h-100">
       <div class="row h-100 align-items-center">
         <div class="col-12">
-          <Notification v-if="error" type="danger" :message="error" />
+          <h1>Arrose moi !</h1>
+          <p>
+            Gérez vos plantes et leurs arrosages au même endroit ! Voyez leur
+            évolution et prenez des notes pour le futur “Vous” !
+          </p>
+
+          <div class="button-bottom">
+            
+          <nuxt-link to="/register" class="inscription btn_fill"
+            >Je m'inscris !</nuxt-link
+          >
+          <nuxt-link to="/login" class="inscription btn_standard"
+            >J'ai un compte!</nuxt-link>
+          </div>
+
+
+          <!-- <Notification v-if="error" type="danger" :message="error" />
           <form method="post" @submit.prevent="login">
             <div class="field">
               
@@ -107,16 +126,7 @@
             <div class="control">
               <button type="submit" class="button is-dark">Se connecter</button>
             </div>
-          </form>
-          <div style="margin-top: 20px">
-            <p>
-              Vous n'avez pas encore de compte ?
-              <nuxt-link to="/register">S'enregistrer</nuxt-link>
-            </p>
-            <p>
-              <nuxt-link to="/forgot-password">Mot de passe oublié ?</nuxt-link>
-            </p>
-          </div>
+          </form> -->
         </div>
       </div>
     </div>
@@ -150,7 +160,7 @@ export default {
     );
   },
   methods: {
-      async login() {
+    async login() {
       this.error = null;
 
       try {
@@ -163,10 +173,7 @@ export default {
         const { jwt, user } = res.data;
         window.localStorage.setItem("jwt", jwt);
         window.localStorage.setItem("userData", JSON.stringify(user));
-        window.localStorage.setItem(
-          "plantes",
-          JSON.stringify(user.plantes)
-        );
+        window.localStorage.setItem("plantes", JSON.stringify(user.plantes));
       } catch (e) {
         console.log(e);
         this.error = e.response.data.message[0].messages[0].message;
@@ -174,21 +181,28 @@ export default {
     },
     async deletePlant(id) {
       var user_id = JSON.parse(window.localStorage.getItem("userData")).id;
-      await axios.delete(`https://warm-plateau-50892.herokuapp.com/arrosage-plantes/${id}`).then(
-        (response) => {
-          console.log(response);
-        },
+      await axios
+        .delete(
+          `https://warm-plateau-50892.herokuapp.com/arrosage-plantes/${id}`
+        )
+        .then(
+          (response) => {
+            console.log(response);
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+            },
+          }
+        );
+      const res = await axios.get(
+        `https://warm-plateau-50892.herokuapp.com/users/${user_id}`,
         {
           headers: {
             Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
           },
         }
       );
-      const res = await axios.get(`https://warm-plateau-50892.herokuapp.com/users/${user_id}`, {
-        headers: {
-          Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
-        },
-      });
       const user = res.data;
       console.log(user.plantes);
 
@@ -217,11 +231,14 @@ export default {
           },
         }
       );
-      const res = await axios.get(`https://warm-plateau-50892.herokuapp.com/users/${user_id}`, {
-        headers: {
-          Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
-        },
-      });
+      const res = await axios.get(
+        `https://warm-plateau-50892.herokuapp.com/users/${user_id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+          },
+        }
+      );
       const user = res.data;
 
       window.localStorage.setItem("userData", JSON.stringify(user));
@@ -237,10 +254,46 @@ export default {
 
 <style lang="scss">
 section.index {
+  background: #0D2C17;
   height: 88vh;
-  form{
-    input{
-      width:100%;
+  position: relative;
+  .button-bottom{
+    position: fixed;
+    bottom: 2rem;
+    display: grid;
+    text-align: center;
+    width:100%;
+    justify-content: center;
+    align-items: center;
+    .btn_fill{
+      padding:1rem 0;
+      background:white;
+      color:#0D2C17;
+      border-radius:20px;
+      text-decoration: none;
+      width:300px;
+    }
+    .btn_standard{
+      text-decoration: none;
+      color: white;
+      margin-top: 2rem;
+    }
+
+  }
+  h1 {
+    font-family: "Rozha One";
+    
+    font-style: normal;
+    font-weight: 400;
+    font-size: 96px;
+    line-height: 68px;
+   text-align: right;
+    text-transform: uppercase;
+    color: #ffffff;
+  }
+  form {
+    input {
+      width: 100%;
       border: none;
       border-radius: 15px;
       box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.25);
@@ -249,23 +302,23 @@ section.index {
       margin-bottom: 1rem;
       background-color: white;
     }
-    button{
-      width:100%;
+    button {
+      width: 100%;
       border: none;
       border-radius: 15px;
       box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.25);
-      background-color: #47A34A;
-      color:white;
+      background-color: #47a34a;
+      color: white;
       height: 3.5rem;
-
     }
   }
   h2 {
     font-family: "Rozha One";
     padding-top: 1rem;
   }
-  p{
+  p {
     text-align: center;
+    color: white;
   }
 }
 ul.listePlantes {
