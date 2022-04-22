@@ -13,7 +13,7 @@
         <p><span>Prochain arrosage :</span> {{ plante.dateArrosage }}</p>
         <p>
           <span>Fréquence d'arrosage :</span> Tous les
-          {{ plante.frequency }} jours
+          {{ plante.frequency }} jour(s) ! 
         </p>
       </div>
 
