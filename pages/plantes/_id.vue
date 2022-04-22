@@ -5,7 +5,7 @@
         <div class="image">
           <img
             v-if="plante.image"
-            v-bind:src="'https://warm-plateau-50892.herokuapp.com' + plante.image.url"
+            v-bind:src="plante.image.url"
           />
           <img v-if="!plante.image" src="" alt="" />
         </div>
@@ -19,6 +19,7 @@
 
       <div class="col-12 menu-flottant">
         <div class="p-relative">
+          
           <button class="arroser" @click="updateTime(plante.id, plante.frequency, plante.dateArrosage)">
             <svg
               width="52"
@@ -39,6 +40,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -134,6 +136,7 @@ export default {
 <style lang="scss">
 .container.contenu {
   height: 88vh;
+  padding-top: 1rem;
   .row {
     height: 100%;
     position: relative;
@@ -174,18 +177,23 @@ export default {
   .image {
     width: 100%;
     height: 30vh;
+
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border-radius: 15px;
     }
   }
   h2 {
     font-family: "Rozha One";
     padding-top: 1rem;
+    font-size: 2.5rem;
+    text-align: center;
   }
   p {
     font-family: "Open Sans";
+    text-align: center;
     span {
       font-weight: 800;
     }
