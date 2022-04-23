@@ -69,9 +69,18 @@
                     <span>Prochain arrosage :</span> {{ item.dateDarrosage }}
                   </p>
                   <p>
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9 0.25C4.16797 0.25 0.25 4.16797 0.25 9C0.25 13.832 4.16797 17.75 9 17.75C13.832 17.75 17.75 13.832 17.75 9C17.75 4.16797 13.832 0.25 9 0.25ZM12.4473 11.6895L11.8887 12.4512C11.8765 12.4678 11.8612 12.4818 11.8436 12.4924C11.826 12.5031 11.8065 12.5102 11.7862 12.5132C11.7659 12.5163 11.7451 12.5154 11.7252 12.5104C11.7052 12.5055 11.6864 12.4966 11.6699 12.4844L8.43945 10.1289C8.41933 10.1145 8.40297 10.0954 8.39175 10.0733C8.38054 10.0512 8.37479 10.0267 8.375 10.002V4.625C8.375 4.53906 8.44531 4.46875 8.53125 4.46875H9.4707C9.55664 4.46875 9.62695 4.53906 9.62695 4.625V9.45898L12.4121 11.4727C12.4824 11.5215 12.498 11.6191 12.4473 11.6895Z" fill="#141414"/>
-                        </svg>
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 18 18"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M9 0.25C4.16797 0.25 0.25 4.16797 0.25 9C0.25 13.832 4.16797 17.75 9 17.75C13.832 17.75 17.75 13.832 17.75 9C17.75 4.16797 13.832 0.25 9 0.25ZM12.4473 11.6895L11.8887 12.4512C11.8765 12.4678 11.8612 12.4818 11.8436 12.4924C11.826 12.5031 11.8065 12.5102 11.7862 12.5132C11.7659 12.5163 11.7451 12.5154 11.7252 12.5104C11.7052 12.5055 11.6864 12.4966 11.6699 12.4844L8.43945 10.1289C8.41933 10.1145 8.40297 10.0954 8.39175 10.0733C8.38054 10.0512 8.37479 10.0267 8.375 10.002V4.625C8.375 4.53906 8.44531 4.46875 8.53125 4.46875H9.4707C9.55664 4.46875 9.62695 4.53906 9.62695 4.625V9.45898L12.4121 11.4727C12.4824 11.5215 12.498 11.6191 12.4473 11.6895Z"
+                        fill="#141414"
+                      />
+                    </svg>
                     <span>Fréquence d'arrosage :</span> Tous les
                     {{ item.frequency }} jours
                   </p>
@@ -167,11 +176,29 @@ export default {
     };
   },
   mounted() {
-    this.plantesEnregistrees = JSON.parse(
-      window.localStorage.getItem("plantes")
-    );
+    if (window.localStorage.getItem("userData")) {
+      this.update();
+    }
   },
   methods: {
+    async update() {
+      var user_id = JSON.parse(window.localStorage.getItem("userData")).id;
+      const res = await axios.get(
+        `https://warm-plateau-50892.herokuapp.com/users/${user_id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+          },
+        }
+      );
+      const user = res.data;
+
+      window.localStorage.setItem("userData", JSON.stringify(user));
+      window.localStorage.setItem("plantes", JSON.stringify(user.plantes));
+      this.plantesEnregistrees = JSON.parse(
+        window.localStorage.getItem("plantes")
+      );
+    },
     async login() {
       this.error = null;
 
@@ -269,7 +296,7 @@ section.index {
   background: #0d2c17;
   height: 88vh;
   position: relative;
-  .background-white{
+  .background-white {
     background-color: white !important;
   }
   .button-bottom {

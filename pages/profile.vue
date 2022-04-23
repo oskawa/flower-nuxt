@@ -2,8 +2,6 @@
   <div class="container add">
     <div class="row">
       <div class="col-12">
-        <input type="text" v-model="donnees.name" />
-        <input type="number" v-model="donnees.frequency" />
         <input
           type="file"
           id="file"
@@ -12,13 +10,18 @@
           @change="previewFiles"
           multiple
         />
-        <input type="date" v-model="donnees.arrosage" />
+
+        <input type="text" v-model="donnees.name" placeholder="Nom de la plante"/>
+        <input type="number" v-model="donnees.frequency" placeholder="Fréquence d'arrosage" />
+
+        <input type="date" v-model="donnees.arrosage" placeholder="Dernier arrosage" />
 
         <button
           id="position"
           class="buttonMovie ajout"
           v-on:click="validPlantes(donnees)"
         >
+        Ajouter
           <svg
             width="34"
             height="34"
@@ -65,14 +68,29 @@ export default {
   methods: {
     previewFiles() {
       this.files = this.$refs.myFiles.files;
-      console.log(this.files);
+     
+    },
+    testPlante(item){
+ 
+      
+      var frequency = parseInt(item.frequency);
+     
+      console.log(PlanteArrosage);
+        
+       
+
     },
     async validPlantes(item) {
       if (window.localStorage.getItem("auth.strategy")) {
         var PlanteName = item.name;
-        var PlanteArrosage = item.arrosage;
-        console.log(PlanteName);
-        var frequency = item.frequency;
+        // var PlanteArrosage = item.arrosage;
+        
+        var frequency = parseInt(item.frequency);
+         var PlanteArrosage = new Date(item.arrosage) ;
+      //  console.log(PlanteArrosage.getDate()+ frequency)
+      PlanteArrosage.setDate(PlanteArrosage.getDate()+ frequency);
+
+
 
         var user_id = JSON.parse(window.localStorage.getItem("userData")).id;
 
@@ -110,11 +128,11 @@ export default {
               }
             )
             .then((res) => {
-              console.log(res.data);
+             
               return res.data;
             })
             .then((refId) => {
-              console.log(refId);
+             
 
               let formData = new FormData();
               formData.append("files", this.files[0]);
@@ -129,10 +147,13 @@ export default {
               return refId;
             })
             .then((res) => {
-              console.log(res);
+      
+             const val = document. querySelector('input')
+             val.value = ""
+
             })
             .catch((error) => {
-              console.log(error);
+             
             });
 
           const res = await axios.get(
@@ -144,7 +165,7 @@ export default {
             }
           );
           const user = res.data;
-          console.log(user)
+          console.log(user);
 
           window.localStorage.setItem("userData", JSON.stringify(user));
           window.localStorage.setItem("plantes", JSON.stringify(user.plantes));
@@ -157,9 +178,24 @@ export default {
 
 
 <style lang="scss">
-.container.add{
-  input{
-    width:100%;
+.container.add {
+  margin-top: 3rem;
+  input {
+    width: 100%;
+    background: #ffffff;
+    border: none;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 34px;
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+  }
+  .buttonMovie{
+width:100%;
+background: #FFFEF8;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 34px;
+border: none;
+
   }
 }
 </style>

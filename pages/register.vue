@@ -84,10 +84,9 @@ export default {
           email: this.email,
           password: this.password,
         });
-        this.success = `A confirmation link has been sent to your email account. \
- Please click on the link to complete the registration process.`;
+        this.success = `Ton compte a bien été validé, tu peux désormais te connecter ! `;
       } catch (e) {
-        this.error = e.response.data.message[0].messages[0].message;
+        this.error = 'Une erreur est survenue, vérifie les informations saisies ! ';
       }
     },
   },
