@@ -19,7 +19,7 @@
 
       <div class="col-12 menu-flottant">
         <div class="p-relative">
-          
+                    
           <button class="arroser" @click="updateTime(plante.id, plante.frequency, plante.dateArrosage)">
             <svg
               width="52"
