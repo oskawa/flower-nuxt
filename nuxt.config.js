@@ -37,6 +37,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/onesignal',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
@@ -50,7 +51,9 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en'
+      name : 'Arrose moi !',
+      lang: 'fr',
+      description:'Une WepAPP pour ne jamais oublier d\'arroser vos plantes !'
     }
   },
   googleFonts: {
@@ -59,6 +62,15 @@ export default {
       'Open+Sans': {
         wght: [300, 400, 500, 600, 700],
       },
+    }
+  },
+  oneSignal: {
+    init: {
+      appId: process.env.ONE_ID,
+      allowLocalhostAsSecureOrigin: true,
+      welcomeNotification: {
+          disable: true
+      }
     }
   },
 

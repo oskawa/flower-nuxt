@@ -85,6 +85,8 @@ export default {
           password: this.password,
         });
         this.success = `Ton compte a bien été validé, tu peux désormais te connecter ! `;
+        this.$router.push({path: "/login"})
+
       } catch (e) {
         this.error = 'Une erreur est survenue, vérifie les informations saisies ! ';
       }
@@ -102,7 +104,7 @@ section#section-register {
     font-family: "Rozha One";
     font-style: normal;
     font-weight: 400;
-    font-size: 96px;
+    font-size: 60px;
     line-height: 68px;
     text-align: right;
     text-transform: uppercase;
