@@ -69,7 +69,7 @@ export default {
       appId: process.env.ONE_ID,
       allowLocalhostAsSecureOrigin: true,
       welcomeNotification: {
-          disable: true
+          disable: false
       }
     }
   },
