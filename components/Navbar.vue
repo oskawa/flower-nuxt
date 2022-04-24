@@ -65,6 +65,7 @@ export default {
   mounted() {
     // Inside page components
     this.$OneSignal.push(() => {
+      this.$OneSignal.setExternalUserId('oskawa')
       this.$OneSignal.isPushNotificationsEnabled((isEnabled) => {
         if (isEnabled) {
           console.log("Push notifications are enabled!");
@@ -75,12 +76,7 @@ export default {
     });
 
     // Using window and array form
-    window.$OneSignal.push([
-      "addListenerForNotificationOpened",
-      (data) => {
-        console.log("Received NotificationOpened:", data);
-      },
-    ]);
+   
     var hamburger = document.getElementById("hamburger-menu");
     var lateral = document.getElementById("lateral");
     var menu_link = document.getElementById("menu-link");
