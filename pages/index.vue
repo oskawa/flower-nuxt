@@ -3,16 +3,14 @@
     <div v-if="isAuthenticated" class="container h-100 background-white">
       <div class="row h-100 align-items-center">
         <div class="col-12 text-center col-plantes">
-          <div v-if="!plantesEnregistrees || (plantesEnregistrees.length == 0)">
-           
-                 
+          <div v-if="!plantesEnregistrees || plantesEnregistrees.length == 0">
             <h2>Votre liste est vide !</h2>
             <nuxt-link class="add-flower" to="/profile"
               >Ajoutez dès maintenant en cliquant ici !</nuxt-link
             >
           </div>
 
-          <ul v-if="plantesEnregistrees" class="listePlantes" >
+          <ul v-if="plantesEnregistrees" class="listePlantes">
             <li v-for="item in plantesEnregistrees" :key="item.id">
               <nuxt-link :to="`/plantes/${item.id}`">
                 <div class="imagePlante">
@@ -148,7 +146,7 @@ export default {
     };
   },
   mounted() {
-    console.log(this.plantesEnregistrees.length)
+    console.log(this.plantesEnregistrees.length);
     if (window.localStorage.getItem("userData")) {
       this.update();
     }
@@ -224,7 +222,7 @@ export default {
       this.plantesEnregistrees = JSON.parse(
         window.localStorage.getItem("plantes")
       );
-       this.$router.push({path: "/"})
+      this.$router.push({ path: "/" });
     },
     async updateTime(id, frequency, arrosage) {
       var user_id = JSON.parse(window.localStorage.getItem("userData")).id;
@@ -272,9 +270,8 @@ section.index {
   position: relative;
   .background-white {
     background-color: white !important;
-    background-image: url('/assets_plante.png');
+    background-image: url("/assets_plante.png");
     background-repeat: no-repeat;
-    
   }
   .button-bottom {
     position: fixed;
@@ -330,9 +327,9 @@ section.index {
       height: 3.5rem;
     }
   }
-  .add-flower{
+  .add-flower {
     text-decoration: none;
-    color:white;
+    color: white;
     background: #0d2c17;
     border-radius: 15px;
     padding: 0.5rem 1rem;
@@ -348,7 +345,7 @@ section.index {
   }
 }
 ul.listePlantes {
-  background-image: url('/assets_plante.png');
+  background-image: url("/assets_plante.png");
   list-style: none;
   padding: 0;
   li {
