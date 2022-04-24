@@ -65,6 +65,7 @@ export default {
   mounted() {
     // Inside page components
     this.$OneSignal.push(() => {
+      this.$OneSignal.sendTag('pseudo', 'oskapseudo')
       this.$OneSignal.setExternalUserId('oskawa')
       this.$OneSignal.isPushNotificationsEnabled((isEnabled) => {
         if (isEnabled) {
