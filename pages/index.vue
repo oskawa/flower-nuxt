@@ -166,6 +166,7 @@ export default {
     this.$OneSignal.push(() => {
 
       this.$OneSignal.setExternalUserId('user_id');
+      this.$OneSignal.sendTag("date", '');
       this.$OneSignal.sendTag("date", date_uniq);
       this.$OneSignal.isPushNotificationsEnabled((isEnabled) => {
         if (isEnabled) {
