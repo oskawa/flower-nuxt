@@ -159,12 +159,14 @@ export default {
       );
       console.log(date);
       const sort = date.sort((a,b)=>b - a)
-      console.log(sort)
+      console.log(sort[0])
+      var date_uniq = new Date(sort[0])
+      console.log(date_uniq)
     }
     this.$OneSignal.push(() => {
 
       this.$OneSignal.setExternalUserId('user_id');
-      this.$OneSignal.sendTag("date", sort[0]);
+      this.$OneSignal.sendTag("date", date_uniq);
       this.$OneSignal.isPushNotificationsEnabled((isEnabled) => {
         if (isEnabled) {
           console.log("Push notifications are enabled!");
