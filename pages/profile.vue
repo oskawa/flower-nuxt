@@ -169,6 +169,8 @@ export default {
 
           window.localStorage.setItem("userData", JSON.stringify(user));
           window.localStorage.setItem("plantes", JSON.stringify(user.plantes));
+
+          this.$router.push({path: "/"})
         }
       }
     },
