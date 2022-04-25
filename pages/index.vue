@@ -164,7 +164,7 @@ export default {
     this.$OneSignal.push(() => {
 
       this.$OneSignal.setExternalUserId('user_id');
-      this.$OneSignal.sendTag("date", sort);
+      this.$OneSignal.sendTag("date", sort[0]);
       this.$OneSignal.isPushNotificationsEnabled((isEnabled) => {
         if (isEnabled) {
           console.log("Push notifications are enabled!");
