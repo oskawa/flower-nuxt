@@ -65,27 +65,7 @@ export default {
   mounted() {
     // Inside page components
 
-    var user_id = JSON.parse(window.localStorage.getItem("userData")).id;
-    var plantesEnregistrees = JSON.parse(
-        window.localStorage.getItem("plantes")
-      );
-    var date = []
-    plantesEnregistrees.forEach(individuel => date.push(individuel.dateDarrosage))
-    console.log(date)
-    this.$OneSignal.push(() => {
-
-      
-      this.$OneSignal.setExternalUserId(user_id)
-      this.$OneSignal.sendTag('pseudo', 'oskapseudo')
-      this.$OneSignal.isPushNotificationsEnabled((isEnabled) => {
-        if (isEnabled) {
-          console.log("Push notifications are enabled!");
-        } else {
-          console.log("Push notifications are not enabled yet.");
-        }
-      });
-    });
-
+    
     // Using window and array form
    
     var hamburger = document.getElementById("hamburger-menu");

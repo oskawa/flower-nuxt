@@ -149,9 +149,32 @@ export default {
     console.log(this.plantesEnregistrees.length);
     if (window.localStorage.getItem("userData")) {
       this.update();
+      this.oneSignal()
     }
   },
   methods: {
+    async oneSignal() {
+      var user_id = JSON.parse(window.localStorage.getItem("userData")).id;
+      var plantesEnregistrees = JSON.parse(
+        window.localStorage.getItem("plantes")
+      );
+      var date = [];
+      plantesEnregistrees.forEach((individuel) =>
+        date.push(individuel.dateDarrosage)
+      );
+      console.log(date);
+      this.$OneSignal.push(() => {
+        this.$OneSignal.setExternalUserId(user_id);
+        this.$OneSignal.sendTag("date", date);
+        this.$OneSignal.isPushNotificationsEnabled((isEnabled) => {
+          if (isEnabled) {
+            console.log("Push notifications are enabled!");
+          } else {
+            console.log("Push notifications are not enabled yet.");
+          }
+        });
+      });
+    },
     async update() {
       var user_id = JSON.parse(window.localStorage.getItem("userData")).id;
       const res = await axios.get(
