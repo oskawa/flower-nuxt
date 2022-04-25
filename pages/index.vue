@@ -162,12 +162,14 @@ export default {
       console.log(sort[0])
       var date_uniq = new Date(sort[0])
       console.log(date_uniq)
+       let timestamp = Math.floor(date_uniq / 1000);
+       console.log(timestamp)
     }
     this.$OneSignal.push(() => {
 
       this.$OneSignal.setExternalUserId('user_id');
       this.$OneSignal.deleteTag("date");
-      this.$OneSignal.sendTag("date", date_uniq);
+      this.$OneSignal.sendTag("date", timestamp);
       this.$OneSignal.isPushNotificationsEnabled((isEnabled) => {
         if (isEnabled) {
           console.log("Push notifications are enabled!");
