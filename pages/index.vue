@@ -162,7 +162,7 @@ export default {
       console.log(sort[0])
       var date_uniq = new Date(sort[0])
       console.log(date_uniq)
-       let timestamp = Math.floor(date_uniq / 1000);
+       var timestamp = Math.floor(date_uniq / 1000);
        console.log(timestamp)
     }
     this.$OneSignal.push(() => {
