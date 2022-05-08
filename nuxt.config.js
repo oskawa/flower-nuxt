@@ -52,6 +52,7 @@ export default {
   pwa: {
     manifest: {
       name : 'Arrose moi !',
+      icon: '/icon.png', 
       lang: 'fr',
       description:'Une WepAPP pour ne jamais oublier d\'arroser vos plantes !'
     }
