@@ -166,12 +166,14 @@ export default {
        console.log(timestamp)
     }
     this.$OneSignal.push(() => {
+      console.log('push push push')
 
       this.$OneSignal.setExternalUserId('user_id');
-      this.$OneSignal.deleteTag("date");
+      
       this.$OneSignal.sendTag("date", timestamp);
       this.$OneSignal.isPushNotificationsEnabled((isEnabled) => {
         if (isEnabled) {
+
           console.log("Push notifications are enabled!");
         } else {
           console.log("Push notifications are not enabled yet.");
