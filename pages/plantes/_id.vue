@@ -16,7 +16,7 @@
 
       <div class="col-12 menu-flottant">
         <div class="p-relative">
-          <button
+          <button v-if="Date.now() > new Date(plante.dateArrosage)"
             class="arroser"
             @click="
               updateTime(plante.id, plante.frequency, plante.dateArrosage)
@@ -130,6 +130,11 @@ export default {
 
   },
   methods: {
+     isSameDay(date1, date2){
+  return date1.getFullYear() === date2.getFullYear() &&
+    date1.getMonth() === date2.getMonth() &&
+    date1.getDay() === date2.getDay()
+},
     async deletePlant(id) {
       var user_id = JSON.parse(window.localStorage.getItem("userData")).id;
       await axios

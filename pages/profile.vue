@@ -3,14 +3,21 @@
     <div class="row">
       <div class="col-12">
         <h5>Photo de votre plante</h5>
-        <input
-          type="file"
-          id="file"
-          ref="myFiles"
-          class="custom-file-input"
-          @change="previewFiles"
-          multiple
-        />
+                <div class="upload-image__div">
+        <div id="preview" class="upload-image__preview">
+         
+          <input
+            type="file"
+            id="file"
+            ref="myFiles"
+            class="custom-file-input upload-image__file"
+            @change="previewFiles"
+            multiple
+          />
+                   <img id="output" class="upload-image__preview_img" src="download.png" />
+
+        </div>
+        </div>
         <h5>Nom de votre plante</h5>
         <input
           type="text"
@@ -38,7 +45,6 @@
           v-on:click="validPlantes(donnees)"
         >
           Ajouter
-         
         </button>
       </div>
     </div>
@@ -71,8 +77,12 @@ export default {
     };
   },
   methods: {
-    previewFiles() {
-      this.files = this.$refs.myFiles.files;
+    previewFiles(event) {
+      var output = document.getElementById('output');
+                            output.src = URL.createObjectURL(event.target.files[0]);
+                            output.onload = function() {
+                                URL.revokeObjectURL(output.src) // free memory
+                            }
     },
     testPlante(item) {
       var frequency = parseInt(item.frequency);
@@ -186,7 +196,16 @@ export default {
     margin-bottom: 2rem;
     padding-left: 1rem;
     min-height: 30px;
+    padding: 1rem;
+    
   }
+ .custom-file-input{
+  border:none;
+  box-shadow: none;
+  background:transparent;
+ opacity:0;
+ margin-bottom:0;
+ }
   .buttonPlante {
     min-height: 50px;
     width: 100%;
@@ -194,10 +213,41 @@ export default {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 34px;
     border: none;
-    &:hover{
+    &:hover {
       background: #204125;
-      color:white;
+      color: white;
     }
+  }
+  .upload-image__preview {
+    position: relative;
+    background: #204125;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+  }
+
+  .upload-image__file {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    cursor: pointer;
+  }
+
+  .upload-image__preview_img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    cursor: pointer;
+    pointer-events: none;
+    max-height: 100%;
   }
 }
 </style>
